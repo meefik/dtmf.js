@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>DTMF Demo</title>
+  <script type="text/javascript" src="lib/dtmf.js"></script>
+  <style>
+  #output {
+    background-color: #eee;
+    min-height: 50px;
+    width: 100%;
+    overflow-wrap: break-word;
+    color: blue;
+    margin-top: 10px;
+  }
+  </style>
+</head>
+
+<body>
+
+  <script type="text/javascript">
+    var sender = new DTMF.Sender();
+    var receiver = new DTMF.Receiver();
+
+    navigator.getUserMedia({
+      audio: true
+    }, function(stream) {
+      var output = document.getElementById("output");
+      receiver.start(stream, function(char) {
+        output.innerHTML += char;
+      });
+    }, function(e) {
+      alert('Cannot access audio stream.');
+      console.log(e);
+    });
+  </script>
+
+  <h1>DTMF Demo</h1>
+
+  <div>
+    <input id="play_seq" type="text" value="1234567890ABCD#*"/>
+    <button onclick="sender.play(document.getElementById('play_seq').value)">Play</button>
+  </div>
+
+  <div id="output"></div>
+
+</body>
+
+</html>
