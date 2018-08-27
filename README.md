@@ -34,3 +34,5 @@ sender.play('1234567890ABCD#*');
 // for destroy sender instance
 // sender.destroy();
 ```
+
+See this video: https://youtu.be/OS6yIiq_Cp8
